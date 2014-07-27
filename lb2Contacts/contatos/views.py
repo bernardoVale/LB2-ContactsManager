@@ -15,6 +15,7 @@ def home(request):
 
 
 def login(request):
+    #User.create_user('bernardo.vale','contacts1992','bernardosilveiravale@gmail.com')
     if request.method == 'POST':
         user = authenticate(username=request.POST['username'],password=request.POST['password'])
         if user is not None:
