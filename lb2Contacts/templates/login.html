@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div class="container">
+        <form action="http://127.0.0.1:8000/login/" class="form-signin"  role="form" method="POST">
+            {% csrf_token %}
+            <h2 class="form-signin-heading">Please sign in</h2>
+            <input type="text" class="form-control" name="username" placeholder="Usuário"
+                   required="true" autofocus="true">
+            <input type="password" class="form-control" name="password"
+                   placeholder="Senha" required="true">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="remember-me"> Lembre-me
+                </label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>

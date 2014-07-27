@@ -2,6 +2,7 @@
 from django.conf.urls import *
 
 urlpatterns = patterns('',
-    url(r'^$', 'lb2Contacts.contatos.views.home')
-    #url(r'^cadencia/', 'lb2Cadencia.reuniao.views.cadencia'),
+    url(r'^$', 'lb2Contacts.contatos.views.home'),
+    url(r'^login/', 'lb2Contacts.contatos.views.login'),
+    url(r'^logout/', 'lb2Contacts.contatos.views.logout')
 )

@@ -30,6 +30,12 @@
             <li><a href="/projeto">Novo Projeto</a></li>
             <li><a href="/cadencia">Minhas Cadências</a></li>
           </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <p class="navbar-text">{{ request.user.username }}</p>
+            <p class="navbar-text">{{ request.user.email }}</p>
+            <li><a href="/logout">Logout</a></li>
+          </ul>
         </div>
       </div>
     </nav>
