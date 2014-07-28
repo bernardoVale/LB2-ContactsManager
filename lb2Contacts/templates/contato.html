@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}LB2 Contacts - Novo Contato{% endblock %}
+{% block content %}
+  <form action="{{ request.get_full_path }}" class="form-horizontal" role="form" method="POST">
+  <div class="jumbotron">
+    <h1>Novo Contato</h1>
+    <p>Adicione um novo contato ao catálogo da LB2!</p>
+   {% csrf_token %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Novo Contato</h3>
+      </div>
+      <div class="panel-body">
+           <div class="form-group {%if form.empresa.errors %}has-error has-feedback{%endif%}">
+                <label for="empresa" class="col-sm-2 control-label"
+                        > Empresa do Contato</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="empresa" placeholder="Empresa do contato..."/>
+                </div>
+            </div>
+            <div class="form-group {%if form.nome.errors %}has-error has-feedback{%endif%}">
+                <label for="nome" class="col-sm-2 control-label"> Nome</label>
+                <div class="col-sm-10">
+                    <input type="text" name="nome" placeholder="Nome..." class="form-control"/>
+                </div>
+            </div>
+            <div class="form-group {%if form.email.errors %}has-error has-feedback{%endif%}">
+                <label for="email" class="col-sm-2 control-label"> Email</label>
+                <div class="col-sm-10">
+                    <input type="text" name="email" placeholder="Email do contato..." class="form-control"/>
+                </div>
+            </div>
+            <div class="form-group {%if form.email.errors %}has-error has-feedback{%endif%}">
+                <label for="telefone" class="col-sm-2 control-label"> Telefone</label>
+                <div class="col-sm-10">
+                    <input type="text" id="telefone" name="telefone" placeholder="Telefone do contato..." class="form-control"/>
+                </div>
+            </div>
+            <div class="form-group {%if form.email.errors %}has-error has-feedback{%endif%}">
+                <label for="celular" class="col-sm-2 control-label"> Celular</label>
+                <div class="col-sm-10">
+                    <input type="text" name="celular" id="celular"
+                           placeholder="Celular do contato..." class="form-control"/>
+                </div>
+            </div>
+            <div class="form-group {%if form.skype.errors %}has-error has-feedback{%endif%}">
+                <label for="skype" class="col-sm-2 control-label"> Skype</label>
+                <div class="col-sm-10">
+                    <input type="text" name="skype" placeholder="Skype" class="form-control"/>
+                </div>
+            </div>
+            <button type="submit" name="Salvar" class="btn btn-lg btn-primary">
+                Criar Contato</button>
+         </div>
+      </div>
+  </div>
+</form>
+{% endblock %}
+{% block scripts %}
+    <script src="{% static "js/jquery-2.1.1.min.js" %}"></script>
+    <script src="{% static "js/bootstrap.js" %}"></script>
+    <script src="{% static "js/maskedinput.js" %}"></script>
+    <script src="{% static "js/novocontato.js" %}"></script>
+{% endblock %}

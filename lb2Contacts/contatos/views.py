@@ -33,3 +33,8 @@ def logout(request):
     auth_logout(request)
     return render_to_response('login.html',
                           context_instance=RequestContext(request))
+
+@login_required
+def novocontato(request):
+    return render_to_response('contato.html',
+                          context_instance=RequestContext(request))
