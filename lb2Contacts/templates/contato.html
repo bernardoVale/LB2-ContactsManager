@@ -16,44 +16,85 @@
                 <label for="empresa" class="col-sm-2 control-label"
                         > Empresa do Contato</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="empresa" placeholder="Empresa do contato..."/>
+                    <input type="text" class="form-control" name="empresa"
+                           {%if form.empresa.errors %}
+                             placeholder=" {{ form.errors.empresa|first }}"
+                            {% else %}
+                             placeholder="Empresa do contato..."
+                           {% endif %}
+                            />
                 </div>
             </div>
             <div class="form-group {%if form.nome.errors %}has-error has-feedback{%endif%}">
                 <label for="nome" class="col-sm-2 control-label"> Nome</label>
                 <div class="col-sm-10">
-                    <input type="text" name="nome" placeholder="Nome..." class="form-control"/>
+                    <input type="text" class="form-control" name="nome"
+                           {%if form.nome.errors %}
+                             placeholder=" {{ form.errors.nome|first }}"
+                            {% else %}
+                             placeholder="Nome..."
+                           {% endif %}
+                            />
                 </div>
             </div>
             <div class="form-group {%if form.email.errors %}has-error has-feedback{%endif%}">
                 <label for="email" class="col-sm-2 control-label"> Email</label>
                 <div class="col-sm-10">
-                    <input type="text" name="email" placeholder="Email do contato..." class="form-control"/>
+                    <input type="text" class="form-control" name="email"
+                           {%if form.email.errors %}
+                             placeholder=" {{ form.errors.email|first }}"
+                            {% else %}
+                             placeholder="Email do contato..."
+                           {% endif %}
+                            />
                 </div>
             </div>
-            <div class="form-group {%if form.email.errors %}has-error has-feedback{%endif%}">
+            <div class="form-group {%if form.telefone.errors %}has-error has-feedback{%endif%}">
                 <label for="telefone" class="col-sm-2 control-label"> Telefone</label>
                 <div class="col-sm-10">
-                    <input type="text" id="telefone" name="telefone" placeholder="Telefone do contato..." class="form-control"/>
+                    <input type="text" id="telefone" class="form-control" name="telefone"
+                           {%if form.telefone.errors %}
+                             placeholder=" {{ form.errors.telefone|first }}"
+                            {% else %}
+                             placeholder="Telefone do contato..."
+                           {% endif %}
+                            />
                 </div>
             </div>
-            <div class="form-group {%if form.email.errors %}has-error has-feedback{%endif%}">
+            <div class="form-group {%if form.celular.errors %}has-error has-feedback{%endif%}">
                 <label for="celular" class="col-sm-2 control-label"> Celular</label>
                 <div class="col-sm-10">
-                    <input type="text" name="celular" id="celular"
-                           placeholder="Celular do contato..." class="form-control"/>
+                    <input type="text" id="celular" class="form-control" name="celular"
+                           {%if form.celular.errors %}
+                             placeholder=" {{ form.errors.celular|first }}"
+                            {% else %}
+                             placeholder="Celular do contato..."
+                           {% endif %}
+                            />
                 </div>
             </div>
             <div class="form-group {%if form.skype.errors %}has-error has-feedback{%endif%}">
                 <label for="skype" class="col-sm-2 control-label"> Skype</label>
                 <div class="col-sm-10">
-                    <input type="text" name="skype" placeholder="Skype" class="form-control"/>
+                    <input type="text" id="skype" class="form-control" name="skype"
+                           {%if form.skype.errors %}
+                             placeholder=" {{ form.errors.skype|first }}"
+                            {% else %}
+                             placeholder="Skype do contato..."
+                           {% endif %}
+                            />
                 </div>
             </div>
             <div class="form-group {%if form.endereco.errors %}has-error has-feedback{%endif%}">
                 <label for="endereco" class="col-sm-2 control-label"> Endereço</label>
                 <div class="col-sm-10">
-                    <input type="text" name="endereco" placeholder="Endereço..." class="form-control"/>
+                    <input type="text" id="endereco" class="form-control" name="endereco"
+                           {%if form.endereco.errors %}
+                             placeholder=" {{ form.errors.endereco|first }}"
+                            {% else %}
+                             placeholder="Endereço do contato..."
+                           {% endif %}
+                            />
                 </div>
             </div>
             <button type="submit" name="Salvar" class="btn btn-lg btn-primary">

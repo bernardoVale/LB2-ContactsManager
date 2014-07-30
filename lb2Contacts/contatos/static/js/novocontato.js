@@ -7,7 +7,7 @@ $('#celular').mask("(99) 9999-9999?9").ready(function(event) {
     if(phone.length > 10) {
         element.mask("(99) 99999-999?9");
     } else {
-        element.mask("(99) 9999-9999?9");  
+        element.mask("(99) 9999-9999?9");
     }
 });
 $('#telefone').mask("(99) 9999-9999");

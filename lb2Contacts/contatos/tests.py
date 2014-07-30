@@ -5,10 +5,12 @@ from lb2Contacts.contatos.models import Contato, Visita, UserPrefs
 
 
 class ContatoTestCase(TestCase):
+
     def setUp(self):
         Contato.drop_collection()
         self.contatoOK = Contato(
             nome = 'Joao',
+            empresa = 'LB2',
             telefone = '4399651538',
             skype = 'joaoskype',
         ).save()
@@ -45,16 +47,15 @@ class ContatoTestCase(TestCase):
         visita = Visita (
             observacoes = 'O nene caiu no estradon.',
             tags = ['NENE','BIXO BURRU'],
+            humor = "CONTENTE",
             visitante = self.u
         )
         self.contatoOK.update(add_to_set__visitas=visita)
-        c_before = self.contatoOK.save()
-        c = Contato.objects.get_or_create(nome='Joao')
-
-        self.assertNotEqual(c_before,c)
-        self.assertEqual(len(c[0].visitas[0].tags),2)
-        self.assertEqual(c[0].visitas[0].visitante.username,'wilmutt')
-        self.assertEqual(c[0].visitas[0].observacoes,'O nene caiu no estradon.')
+        c = Contato.objects.get(nome='Joao')
+        self.assertEqual(len(c.visitas[0].tags),2)
+        self.assertEqual(c.visitas[0].visitante.username,'wilmutt')
+        self.assertEqual(c.visitas[0].observacoes,'O nene caiu no estradon.')
+        self.assertEqual(c.visitas[0].humor,'CONTENTE')
 
     def test_user_prefs(self):
         """
@@ -71,7 +72,7 @@ class ContatoTestCase(TestCase):
         self.assertEqual(cc.user_prefs[0].user.username,'wilmutt')
         self.assertEqual(cc.user_prefs[0].alerta,'SEMANAL')
 
-    def test_update_user_prefs(self):
+    def test_update_user_prefs_alerta(self):
         """
         Testa a atualização do alerta de um usuário de semanal para mensal
         para um determinado contato.
@@ -84,4 +85,21 @@ class ContatoTestCase(TestCase):
         self.contatoOK.update(add_to_set__user_prefs=user_prefs)
         self.contatoOK.save()
         user_prefs.alerta = 'MENSAL'
+        #todo Depois do set eu não consigo dar um get nesse capudo. Verificar o pq
+        Contato.objects(id=self.contatoOK.pk).update(set__user_prefs=user_prefs)
+
+    def test_update_user_prefs_situacao(self):
+        """
+        Testa a atualização do alerta de um usuário de semanal para mensal
+        para um determinado contato.
+        :return:
+        """
+        user_prefs = UserPrefs(
+            user = self.u,
+            alerta = 'SEMANAL',
+            situacao = 'POSSIVEL CLIENTE'
+        )
+        self.contatoOK.update(add_to_set__user_prefs=user_prefs)
+        self.contatoOK.save()
+        user_prefs.situacao = 'PROJETO ATIVO'
         Contato.objects(id=self.contatoOK.pk).update(set__user_prefs=user_prefs)
