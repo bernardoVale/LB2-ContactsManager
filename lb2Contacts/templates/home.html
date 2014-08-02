@@ -4,8 +4,50 @@
 
 {% block content %}
     <div class="lb2_jumbotron jumbotron">
-        <h1>LB2 Contacts</h1>
-        <p><h4>Olá, seja bem vindo!</h4>
-        {{ contato }}
+            <h1>LB2 Contacts</h1>
+            <p>Olá, {{ user.username }} seja bem vindo!</p>
+            <p>Encontre seus contatos no campo de pesquisa para começar!</p>
     </div>
+        {% if contacts_list > 0 %}
+        <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Contatos Encontrados</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Contato</th>
+                                <th>Empresa</th>
+                                <th>Email</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for c in contacts_list %}
+                            <tr>
+                                <td>{{ c.nome }}</td>
+                                <td>{{ c.empresa }}</td>
+                                <td>{{ c.email }}</td>
+                                <td>
+                                    <button type="submit"
+                                            class="btn-success btn fa fa-plus" id="{{ p.pk }}"
+                                            name="action" value="new"> Nova Visita
+                                    </button>
+                                    <button type="submit"
+                                            class="btn-info btn fa fa-trash-o" name="action"
+                                            value="info"> Mais Informações
+                                    </button>
+                                    <button type="submit"
+                                            class="btn-warning btn fa fa-trash-o" name="action"
+                                            value="info"> Preferências
+                                    </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% endif %}
+        </div>
 {% endblock %}

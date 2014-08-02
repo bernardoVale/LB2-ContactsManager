@@ -5,6 +5,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
+from mongoengine import Q
 from mongoengine.django import auth
 from mongoengine.django.auth import User
 from lb2Contacts.contatos.forms import ContatoForm
@@ -19,10 +20,11 @@ def home(request):
     :return:
     """
     if request.method == 'POST':
-        #todo Query utilizando filtro com Or
-        resultset = Contato.objects(__raw__= { "$or" : [ {"nome" : {"$regex" : "^a"}}] })
-        print resultset
-        return render_to_response('home.html',{'contato':request.POST['search']},
+        #Lista de contatos
+        contacts_list = Contato.objects\
+            (Q(nome__icontains=request.POST['search'])
+             | Q(empresa__icontains=request.POST['search']))
+        return render_to_response('home.html',{'contacts_list':contacts_list},
                               context_instance=RequestContext(request))
     return render_to_response('home.html',
                               context_instance=RequestContext(request))
@@ -74,4 +76,9 @@ def novocontato(request):
             return render_to_response('contato.html',{'form' : form},
                           context_instance=RequestContext(request))
     return render_to_response('contato.html',
+                          context_instance=RequestContext(request))
+
+@login_required
+def visita(request):
+    return render_to_response('visita.html',
                           context_instance=RequestContext(request))

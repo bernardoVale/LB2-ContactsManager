@@ -6,4 +6,5 @@ urlpatterns = patterns('',
     url(r'^login/', 'lb2Contacts.contatos.views.login'),
     url(r'^logout/', 'lb2Contacts.contatos.views.logout'),
     url(r'^contato/', 'lb2Contacts.contatos.views.novocontato'),
+    url(r'^visita/', 'lb2Contacts.contatos.views.visita'),
 )

@@ -1,5 +1,6 @@
 # coding=utf-8
 from django.utils.unittest.case import TestCase
+from mongoengine import Q
 from mongoengine.django.auth import User
 from lb2Contacts.contatos.models import Contato, Visita, UserPrefs
 
@@ -103,3 +104,16 @@ class ContatoTestCase(TestCase):
         self.contatoOK.save()
         user_prefs.situacao = 'PROJETO ATIVO'
         Contato.objects(id=self.contatoOK.pk).update(set__user_prefs=user_prefs)
+
+    def test_search_contato_multiple_fields(self):
+        """
+        Testa a pesquisa de um contato por multiplos campos
+        :return:
+        """
+
+        contato = Contato.objects(Q(nome__contains='J') | Q(empresa__contains='3'))
+        self.assertEqual(contato[0].nome,'Joao')
+        contato2 = Contato.objects(Q(nome__contains='LOL') | Q(empresa__contains='L'))
+        self.assertEqual(contato2[0].nome,'Joao')
+        contato3 = Contato.objects(Q(nome__contains='LOL') | Q(empresa__contains='A'))
+        self.assertNotEqual(contato3,'Joao')
